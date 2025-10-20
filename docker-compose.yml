@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: televerse-backend
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT=3000
+      - MONGODB_URI=${MONGODB_URI}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
+      - GMAIL_USER=${GMAIL_USER}
+      - CLOUDFLARE_TEAM_DOMAIN=${CLOUDFLARE_TEAM_DOMAIN}
+      - CLOUDFLARE_AUD=${CLOUDFLARE_AUD}
+      - GMAIL_APP_PASSWORD=${GMAIL_APP_PASSWORD}
+      - SHEET_ID_IOTrix=${SHEET_ID_IOTrix}
+      - SHEET_ID_ApiAvengers=${SHEET_ID_ApiAvengers}
+      - SHEET_ID_StealthFlags=${SHEET_ID_StealthFlags}
+      - SHEET_ID_AIFication=${SHEET_ID_AIFication}
+    volumes:
+      - ./credentials.json:/app/credentials.json:ro
+    networks:
+      - televerse-network
+  
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${CF_TUNNEL_TOKEN}
+    networks:
+      - televerse-network
+
+networks:
+  televerse-network:
+    driver: bridge
+

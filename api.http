@@ -1,0 +1,46 @@
+### Variables
+@baseUrl = https://checker.eteteleverse.com/
+@apiUrl = {{baseUrl}}/api
+
+### Health Check
+GET {{baseUrl}}/ping
+
+### ===================================
+### DOCS API (Google Sheets Data)
+### ===================================
+
+### Get all data from Google Sheets
+GET {{apiUrl}}/docs
+
+### Refresh data from Google Sheets
+GET {{apiUrl}}/docs/refresh
+
+### Get data by category
+GET {{apiUrl}}/docs/category/aification
+
+### Search transactions
+GET {{apiUrl}}/docs/search?query=test&fields=description
+
+### Get duplicates report
+GET {{apiUrl}}/docs/duplicates
+
+### Get statistics
+GET {{apiUrl}}/docs/stats
+
+### ===================================
+### EMAIL API
+### ===================================
+
+### Get email history
+GET {{apiUrl}}/email/history
+
+### Get email statistics
+GET {{apiUrl}}/email/stats
+
+### ===================================
+### AUTH API
+### ===================================
+
+### Verify Cloudflare Access authentication
+# GET {{apiUrl}}/auth/verify
+
