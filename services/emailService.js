@@ -178,7 +178,7 @@ class EmailService {
         
         const records = await EmailRecordModel.find(query)
           .sort({ sentAt: -1 })
-          .limit(50);
+          .limit(500);
 
         return records;
       } else {
